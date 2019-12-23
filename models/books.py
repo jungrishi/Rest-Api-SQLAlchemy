@@ -15,14 +15,14 @@ class BookType(Enum):
 
 class Book(Base, BaseModel):
   __tablename__ = "books"
-  id = Column(UUIDTYPE(), primary_key =  True)
+  id = Column(UUIDType(), primary_key =  True)
   book_name = Column(String, nullable = False)
   book_type = Column(ChoiceType(BookType), nullable = False)
   published_date = Column(DateTime, nullable = True)
   created_at = Column(DateTime, server_default = func.now())
   last_updated = Column(DateTime, onupdate=func.now())
 
-  def ___init__(self, *, id: UUID = None, book_name: str, book_type: str, published_date: datetime, ):
+  def ___init__(self, *, book_name: str, book_type: str, published_date: datetime, id: UUID = None ):
     if not id:
       id = uuid4()
     self.id = id
